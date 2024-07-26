@@ -11,6 +11,10 @@ public class Openable : Interactables
     [SerializeField] private Transform _doorPivot;
     [SerializeField] private Transform _doorPivot2;
 
+    string _uiMessage;
+    [SerializeField] private UI_Manager _uiManager;
+
+
 
     //CORE FUNCTIONS
     void FiniteStateMachine()
@@ -37,9 +41,7 @@ public class Openable : Interactables
                 { 
                     _doorPivot2.Rotate(0, -90, 0);
                     _doorPivot2.Rotate(0, 90, 0);
-
                 }
-
                 break;
             case OpenableType.Revolving:
                 break;
@@ -50,14 +52,9 @@ public class Openable : Interactables
         }
     }
 
-    void OpenDoor()
-    {
-
-    }
-
-    void CloseDoor()
-    {
-
+    public override void UpdateUIManagerMessage(string message)
+    {        
+        _uiManager.UpdateTextField(_uiMessage);
     }
 
     //TRIGGER FUNCTIONS
@@ -65,6 +62,9 @@ public class Openable : Interactables
     {
         if(other.tag == "Player" && _isOpened == false)
         {
+            _uiMessage = "Opening " + _openableType.ToString() + " Door";
+            _uiManager.UpdateTextField(_uiMessage);
+
             Debug.Log("Opening Door");
             _isOpened = true;
             FiniteStateMachine();
@@ -75,6 +75,9 @@ public class Openable : Interactables
     {
         if(other.tag == "Player" && _isOpened)
         {
+            _uiMessage = "Closing " + _openableType.ToString() + " Door";
+            _uiManager.UpdateTextField(_uiMessage);
+
             Debug.Log("Closing Door");
             _isOpened = false;
             FiniteStateMachine();

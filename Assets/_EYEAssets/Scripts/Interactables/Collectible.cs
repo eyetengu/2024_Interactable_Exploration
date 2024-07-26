@@ -8,7 +8,8 @@ public class Collectible : Interactables
         [SerializeField] valueTypes _valueTypes;
 
     [SerializeField] private int _collectibleValue;
-    
+    string _uiMessage;
+    [SerializeField] private UI_Manager _uiManager;
 
     //CORE FUNCTIONS
     public override void RunParticleEffect()
@@ -29,16 +30,30 @@ public class Collectible : Interactables
 
         if (other.tag == "Player")
         {
+            _uiMessage = "Collecting " + _valueTypes + " Collectible";
+            _uiManager.UpdateTextField(_uiMessage);
             PlayAudioClip();
 
             if (_valueTypes == valueTypes.experience)
-            { Debug.Log(_collectibleValue + " Experience Added"); }     //add _collectibleValue to players experience          
+            { 
+                Debug.Log(_collectibleValue + " Experience Added");
+                _uiManager.UpdateExperience(_collectibleValue);
+            }      
             else if (_valueTypes == valueTypes.coin)
-            { Debug.Log(_collectibleValue + " Coin Added"); }     //add _collectibleValue to players coin
+            { 
+                Debug.Log(_collectibleValue + " Coin Added"); 
+                _uiManager.UpdateGold(_collectibleValue);
+            }
             else if (_valueTypes == valueTypes.health)
-            { Debug.Log(_collectibleValue + " Health Added"); }     //add _collectibleValue to players health
+            { 
+                Debug.Log(_collectibleValue + " Health Added"); 
+                _uiManager.UpdateHealth(_collectibleValue);
+            }
             else if(_valueTypes == valueTypes.score) 
-            { Debug.Log(_collectibleValue + " Score Added"); }     //add _collectibleValue to players score
+            { 
+                Debug.Log(_collectibleValue + " Score Added");
+                _uiManager.UpdateScore(_collectibleValue);
+            }
 
             Destroy(gameObject, 1.2f);
         }

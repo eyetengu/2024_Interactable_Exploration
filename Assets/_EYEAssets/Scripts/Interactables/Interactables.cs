@@ -20,6 +20,11 @@ public class Interactables : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
     }
 
+    public virtual void UpdateUIManagerMessage(string message)
+    {
+
+    }
+
     //AUDIO / VISUAL EFFECTS
     public virtual void PlayAudioClip()
     {
