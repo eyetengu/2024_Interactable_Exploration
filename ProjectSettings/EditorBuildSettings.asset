@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_EYEAssets/Scenes/InteractablePlaybox.unity
+    guid: 2d92376469634ae498232404e82b50a6
   m_configObjects: {}

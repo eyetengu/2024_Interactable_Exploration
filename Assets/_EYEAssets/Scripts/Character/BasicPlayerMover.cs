@@ -11,6 +11,11 @@ public class BasicPlayerMover : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape) )
+        {
+            Application.Quit();
+        }
+
         _step = _speed * _speedMultiplier * Time.deltaTime;
         PlayerMover();
         UserInput();
@@ -30,7 +35,10 @@ public class BasicPlayerMover : MonoBehaviour
         Vector3 direction = new Vector3(0, 0, vertical);
 
         //player rotation
-        transform.Rotate(0, horizontal * _step * 10, 0);
+
+        //THE FOLLOWING LINE OF CODE COMMENTED OUT TO ELIMINATE PLAYER ROTATION FOR END USER EASE OF USE
+
+        //transform.Rotate(0, horizontal * _step * 10, 0);
                     //transform.TransformDirection(transform.forward);          unnecessary code line
         
         //player movement
